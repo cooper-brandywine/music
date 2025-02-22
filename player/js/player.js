@@ -181,11 +181,13 @@ function shuffleTracks() {
 let lastTapTime = 0;
 
 function handleDoubleTap(event, index) {
+    event.preventDefault(); // Prevents unintended long-press behavior
+
     const currentTime = new Date().getTime();
     const tapGap = currentTime - lastTapTime;
 
-    if (tapGap < 300) { // Detects double-tap within 300ms
-        togglePlayPause(index); // ✅ Toggles play/pause
+    if (tapGap < 300) { // ✅ Properly detects a double tap within 300ms
+        togglePlayPause(index);
     }
 
     lastTapTime = currentTime;
