@@ -177,22 +177,18 @@ function shuffleTracks() {
 }
 
 // 📌 Handle Double Tap on Mobile
-let tapTimeout = null; // Prevents duplicate executions
+
+let lastTapTime = 0;
 
 function handleDoubleTap(event, index) {
     const currentTime = new Date().getTime();
-    const tapGap = currentTime - lastTap;
+    const tapGap = currentTime - lastTapTime;
 
-    if (tapGap < 300) { // If second tap happens within 300ms
-        clearTimeout(tapTimeout); // Prevent any scheduled play/pause
-        togglePlayPause(index);
-    } else {
-        tapTimeout = setTimeout(() => {
-            clearTimeout(tapTimeout);
-        }, 300);
+    if (tapGap < 300) { // Detects double-tap within 300ms
+        togglePlayPause(index); // ✅ Toggles play/pause
     }
 
-    lastTap = currentTime;
+    lastTapTime = currentTime;
 }
 
 // 🎵 Auto-Play Next Track When Current Ends

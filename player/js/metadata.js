@@ -76,9 +76,9 @@ function displaySongs() {
             <td>${formatTime(song.length)}</td>
         `;
 
-        // Add event listeners for double-click and double-tap
-        songRow.addEventListener("dblclick", () => togglePlayPause(index));
-        songRow.addEventListener("touchstart", (event) => handleDoubleTap(event, index));
+        // ✅ Add event listeners
+        songRow.addEventListener("dblclick", () => togglePlayPause(index)); // Desktop double-click
+        songRow.addEventListener("touchstart", (event) => handleDoubleTap(event, index)); // Mobile double-tap
 
         songList.appendChild(songRow);
     });
